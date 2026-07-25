@@ -15,6 +15,7 @@ global using Domain.Constants;
 global using Domain.Common;
 global using AutoMapper;
 global using Domain.Interfaces.Repositories;
+global using Domain.Interfaces.Repositories.Base;
 global using Domain.Enums;
 global using Domain.Entities.SchemaName;
 global using System.Security.Claims;

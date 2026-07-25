@@ -57,8 +57,8 @@ public static class DependencyInjection
         // Yetkiler
         builder.Services.AddAuthorization(options =>
         {
-            //"CanCreateProduct" adında bir policy tanımla. Bu policy, "Administrator" rolüne sahip kullanıcıları kabul etsin.
-            options.AddPolicy(Policies.CanCreateProduct, policy => policy.RequireRole(Roles.Administrator));
+            // Örnek policy: Administrator rolündeki kullanıcılar örnek kayıt oluşturabilir (CreateSampleEntityCommand).
+            options.AddPolicy(Policies.CanCreateSampleEntity, policy => policy.RequireRole(Roles.Administrator));
         });
 
         // IOptions Models

@@ -204,8 +204,10 @@ public class IdentityService(
         return Result.Success(result);
     }
 
-    private const string TickerId = "ticker";
-    private const string TickerUserName = "Hatırlatıcı";
+    // Interceptor'lar HTTP bağlamı olmadığında audit alanlarına "system" yazar;
+    // display-name çözümlemesinde bu sahte kullanıcı Identity'e sorulmadan doldurulur.
+    private const string SystemUserId = "system";
+    private const string SystemUserName = "Sistem";
 
     public async Task<IReadOnlyDictionary<string, string?>> ResolveDisplayNamesAsync(IEnumerable<string?> userIds, CancellationToken ct)
     {
@@ -218,8 +220,8 @@ public class IdentityService(
         var dict = new Dictionary<string, string?>(StringComparer.OrdinalIgnoreCase);
 
         // system’i doğrudan doldur
-        if (ids.RemoveAll(id => id.Equals(TickerId, StringComparison.OrdinalIgnoreCase)) > 0)
-            dict[TickerId] = TickerUserName;
+        if (ids.RemoveAll(id => id.Equals(SystemUserId, StringComparison.OrdinalIgnoreCase)) > 0)
+            dict[SystemUserId] = SystemUserName;
 
         if (ids.Count == 0) return dict;
 
@@ -233,7 +235,7 @@ public class IdentityService(
     public async Task<string?> ResolveDisplayNameAsync(string? userId, CancellationToken ct)
     {
         if (string.IsNullOrWhiteSpace(userId)) return null;
-        if (userId.Equals(TickerId, StringComparison.OrdinalIgnoreCase)) return TickerUserName;
+        if (userId.Equals(SystemUserId, StringComparison.OrdinalIgnoreCase)) return SystemUserName;
 
         var u = await GetUserInfoByIdAsync(userId);
         return u?.FullName;
