@@ -19,3 +19,7 @@ global using Asp.Versioning.ApiExplorer;
 global using Microsoft.Extensions.Options;
 global using Microsoft.OpenApi;
 global using Swashbuckle.AspNetCore.SwaggerGen;
+global using System.Text.Json.Serialization;
+global using Infrastructure.Persistence;
+global using Application.Features.SampleEntities.Commands.CreateSampleEntity;
+global using Application.Features.SampleEntities.Queries.GetSampleEntitiesByNumber;

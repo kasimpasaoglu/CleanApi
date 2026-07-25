@@ -1,5 +1,3 @@
-using Microsoft.AspNetCore.OutputCaching;
-
 namespace Web.Extensions;
 
 public static class OutputCacheStoreExtensions

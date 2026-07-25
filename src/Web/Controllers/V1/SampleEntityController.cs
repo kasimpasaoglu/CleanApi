@@ -1,8 +1,3 @@
-
-
-using Application.Features.SampleEntities.Commands.CreateSampleEntity;
-using Application.Features.SampleEntities.Queries.GetSampleEntitiesByNumber;
-
 namespace Web.Controllers.V1;
 
 [ApiController]

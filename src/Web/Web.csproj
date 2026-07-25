@@ -33,4 +33,9 @@
         <ProjectReference Include="..\Infrastructure\Infrastructure.csproj"/>
     </ItemGroup>
 
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="Infrastructure\Localization\localization.en.json" />
+      <_ContentIncludedByDefault Remove="Infrastructure\Localization\localization.tr.json" />
+    </ItemGroup>
+
 </Project>

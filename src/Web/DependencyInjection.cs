@@ -1,7 +1,3 @@
-using System.Text.Json.Serialization;
-using Infrastructure.Persistence;
-
-
 using Web.Services;
 
 namespace Web;
@@ -42,7 +38,7 @@ public static class DependencyInjection
             options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
             options.JsonSerializerOptions.NumberHandling = JsonNumberHandling.AllowReadingFromString;
         });
-        
+
         builder.Services.AddProblemDetails();
         builder.Services.AddExceptionHandler<CustomExceptionHandler>();
 

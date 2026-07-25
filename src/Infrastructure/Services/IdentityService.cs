@@ -120,7 +120,7 @@ public class IdentityService(
                 await smtpEmailService.SendWithBccAsync(
                     user.Email,
                     [SystemContactEmail],
-                    "Nexup CRM - Hesap Geçici Olarak Bloke Edildi",
+                    "CleanApi - Hesap Geçici Olarak Bloke Edildi",
                     html);
             }
 
@@ -408,7 +408,7 @@ public class IdentityService(
                                  <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;background-color:#ffffff;border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
                                      <tr>
                                          <td style="background-color:#0f172a;padding:24px 32px;">
-                                             <h1 style="margin:0;color:#ffffff;font-size:20px;font-weight:600;letter-spacing:0.3px;">Nexup CRM - Hesap Bloke Bildirimi</h1>
+                                             <h1 style="margin:0;color:#ffffff;font-size:20px;font-weight:600;letter-spacing:0.3px;">CleanApi - Hesap Bloke Bildirimi</h1>
                                          </td>
                                      </tr>
                                      <tr>

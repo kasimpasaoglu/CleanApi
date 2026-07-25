@@ -1,5 +1,3 @@
-
-
 namespace Web.Extensions;
 
 public static class ResultExtensions
@@ -20,4 +18,3 @@ public static class ResultExtensions
         return result.IsSuccess ? onSuccess(result.Value) : onFailure(result);
     }
 }
-

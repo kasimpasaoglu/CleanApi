@@ -26,7 +26,7 @@ public sealed class ConfigureSwaggerOptions(IApiVersionDescriptionProvider provi
         {
             options.SwaggerDoc(desc.GroupName, new OpenApiInfo
             {
-                Title = "Nova CRM API",
+                Title = "CleanApi",
                 Version = desc.ApiVersion.ToString()
             });
         }

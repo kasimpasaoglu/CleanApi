@@ -34,13 +34,10 @@ public static class DependencyInjection
         });
 
 
-        // Cookie-native auth: .NET API login sonrasi nexup_session cookie'si set eder.
-        // Next.js sunucusu bu cookie'yi Cookie header olarak backend'e forward eder (BFF yok).
-        // Sliding expiration: 3 gun sessizlikte oturum sona erer; refresh token kavrami yoktur.
         builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
             .AddCookie(options =>
             {
-                options.Cookie.Name = "nexup_session";
+                options.Cookie.Name = "CleanApi_session";
                 options.Cookie.HttpOnly = true;
                 options.Cookie.SameSite = SameSiteMode.Lax;
                 options.Cookie.SecurePolicy = CookieSecurePolicy.Always;

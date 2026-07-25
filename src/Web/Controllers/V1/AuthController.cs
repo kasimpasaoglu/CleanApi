@@ -1,5 +1,3 @@
-
-
 namespace Web.Controllers.V1;
 
 [ApiController]
@@ -31,7 +29,7 @@ public class AuthController() : BaseApiController
                 detail: "Oturum cookie'si oluşturulamadı.",
                 statusCode: StatusCodes.Status500InternalServerError);
         }
-        
+
         var meResult = await Mediator.Send(new FindMeQuery(result.Value), cancellationToken);
         return meResult.Match(
             user => Results.Ok(new LoginResponse(sessionToken, user)),

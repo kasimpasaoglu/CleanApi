@@ -1,6 +1,3 @@
-
-
-
 namespace Web.Infrastructure;
 
 public class CustomExceptionHandler : IExceptionHandler
@@ -22,7 +19,7 @@ public class CustomExceptionHandler : IExceptionHandler
             await handler.Invoke(httpContext, exception, ct);
             return true;
         }
-        
+
         // Dev: UNHANDLED'I HİÇ HANDLE ETME
         if (httpContext.RequestServices.GetRequiredService<IHostEnvironment>().IsDevelopment())
             return false;
@@ -33,6 +30,7 @@ public class CustomExceptionHandler : IExceptionHandler
     }
 
     #region Business Exceptions
+
     private static async Task HandleBusinessException(HttpContext httpContext, Exception ex, CancellationToken ct)
     {
         // TODO: Loglama yapilacak
@@ -46,9 +44,11 @@ public class CustomExceptionHandler : IExceptionHandler
         httpContext.Response.StatusCode = pd.Status ?? StatusCodes.Status500InternalServerError;
         await httpContext.Response.WriteAsJsonAsync(pd, ct);
     }
+
     #endregion
 
     #region Validation Exceptions
+
     private static async Task HandleValidationException(HttpContext httpContext, Exception ex, CancellationToken ct)
     {
         var exception = (ValidationException)ex;
@@ -61,9 +61,11 @@ public class CustomExceptionHandler : IExceptionHandler
             Type = "https://tools.ietf.org/html/rfc7231#section-6.5.1"
         }, ct);
     }
+
     #endregion
 
     #region Authorization Exceptions
+
     private static async Task HandleUnauthorizedAccessException(HttpContext httpContext, Exception ex, CancellationToken ct)
     {
         //TODO: hatali giris denemeleri loglanacak
@@ -76,21 +78,24 @@ public class CustomExceptionHandler : IExceptionHandler
         };
         await httpContext.Response.WriteAsJsonAsync(pd, ct);
     }
-    
+
     #endregion
 
     #region OperationCanceledExceptions
+
     private static Task HandleOperationCanceledException(HttpContext httpContext, Exception ex, CancellationToken ct)
     {
         return Task.CompletedTask; // istek iptal edilirse hic bisey yapmadan sessizce geciyoruz
     }
+
     #endregion
-    
+
     #region FallBack
+
     private static async Task HandleUnhandledException(HttpContext httpContext, Exception ex, CancellationToken ct)
     {
         // Burada Mongo log vb. yapacağın yer burası.
-        
+
         if (httpContext.Response.HasStarted) // SignalR,Streaming response, file upload / download gibi durumlarda response başlamış olabilir, ikinci bir exception üretmemek için burada sadece loglama yapılır
         {
             // burada sadece loglanır, response'a dokunulmaz
@@ -98,7 +103,7 @@ public class CustomExceptionHandler : IExceptionHandler
         }
 
         ProblemDetails pd;
-        
+
         try
         {
             pd = ProblemDetailsFactory.FromException(ex);
@@ -116,5 +121,6 @@ public class CustomExceptionHandler : IExceptionHandler
         httpContext.Response.StatusCode = pd.Status ?? StatusCodes.Status500InternalServerError;
         await httpContext.Response.WriteAsJsonAsync(pd, ct);
     }
+
     #endregion
 }
