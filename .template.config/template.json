@@ -1,0 +1,51 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Kasım Paşaoğlu",
+  "classifications": ["Web", "API", "Clean Architecture"],
+  "identity": "KasimPasaoglu.Templates.CleanApi",
+  "name": "Clean Architecture Web API",
+  "shortName": "clean-api",
+  "sourceName": "CleanApi",
+  "preferNameDirectory": true,
+  "tags": { "language": "C#", "type": "solution" },
+  "guids": [
+    "7265E805-6AD7-46DB-86A4-8B08BAD70167",
+    "94075130-6FE4-400B-9E0A-F984774C4EB6",
+    "C8D94DE3-ECEE-4ABA-B0B7-F430DA109D45",
+    "BAE4EA20-FCD0-4DFB-AD75-615B704CF261",
+    "3c35e9c0-81f5-4515-89c3-3537c16fd716"
+  ],
+  "sources": [
+    {
+      "modifiers": [
+        {
+          "exclude": [
+            ".git/**",
+            ".idea/**",
+            "**/bin/**",
+            "**/obj/**",
+            "**/*.user",
+            "**/*.DotSettings.user",
+            "src/Web/Logs/**"
+          ]
+        }
+      ]
+    }
+  ],
+  "postActions": [
+    {
+      "actionId": "210D431B-A78B-4D2F-B762-4ED3E3EA9025",
+      "description": "NuGet paketlerini geri yükle",
+      "manualInstructions": [{ "text": "dotnet restore çalıştırın" }],
+      "continueOnError": true
+    },
+    {
+      "actionId": "AC1156F7-BB77-4DB8-B28F-24EEBCCA1E5C",
+      "description": "İlk adımlar",
+      "manualInstructions": [
+        { "text": "README.md içindeki 'İlk çalıştırma — adım adım' bölümünü izleyin (connection string → ilk migration → dotnet run)" }
+      ],
+      "continueOnError": true
+    }
+  ]
+}
