@@ -10,10 +10,9 @@ public interface IDbInitializer
     Task InitializeAsync(CancellationToken cancellationToken = default);
     
     /// <summary>
-    /// GeoData, Lead Data gibi acilis seed verilerini ekler.
+    /// Acilis seed verilerini ekler.
     /// </summary>
-    /// <param name="geoDataJsonPath">geo datasinin oldugu dizin</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task TrySeedAsync(string geoDataJsonPath, CancellationToken cancellationToken = default);
+    Task TrySeedAsync(CancellationToken cancellationToken = default);
 }

@@ -22,7 +22,7 @@ public class DbInitializer(
         }
     }
 
-    public async Task TrySeedAsync(string geoDataJsonPath, CancellationToken cancellationToken = default)
+    public async Task TrySeedAsync(CancellationToken cancellationToken = default)
     {
         await new AdminSeeder(userManager, roleManager, context, logger).SeedAsync(cancellationToken);
     }
@@ -42,13 +42,6 @@ public static class DbInitializerExtensions
         await initializer.InitializeAsync();
 
         if (cfg.GetValue<bool>("SeedInitialData"))
-        {
-            var geoJsonPath = cfg.GetValue<string>("GeoSeed:JsonPath");
-            if (string.IsNullOrWhiteSpace(geoJsonPath))
-                throw new InvalidOperationException("GeoSeed:JsonPath missing");
-
-
-            await initializer.TrySeedAsync(geoJsonPath);
-        }
+            await initializer.TrySeedAsync();
     }
 }

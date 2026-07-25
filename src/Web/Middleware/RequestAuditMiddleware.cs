@@ -93,14 +93,10 @@ public class RequestAuditMiddleware(RequestDelegate next, ILogger<RequestAuditMi
         "/favicon.ico",
         "/_framework",
         "/_content",
-        "/api/v1/geo"
     };
 
     private static readonly string[] DebugDowngradePrefixes =
     {
-        "/hubs/calls",
-        "/hubs/logs",
-        "/api/v1/Auth/signalr-token"
     };
 
 }
