@@ -8,7 +8,7 @@ namespace Web.Controllers.V1;
 [Route("api/v{version:apiVersion}/[controller]")]
 public class AuthController() : BaseApiController
 {
-    private const string SessionCookieName = "nexup_session";
+    private const string SessionCookieName = "CleanApi_session";
 
     [AllowAnonymous]
     [HttpPost("login")]
@@ -31,11 +31,7 @@ public class AuthController() : BaseApiController
                 detail: "Oturum cookie'si oluşturulamadı.",
                 statusCode: StatusCodes.Status500InternalServerError);
         }
-
-        // SignInAsync sadece response cookie'sini yazar; bu request'in HttpContext.User'ı
-        // hâlâ anonim. LoginCommand'dan dönen ClaimsPrincipal ile FindMe'yi çağırıyoruz ki
-        // frontend tek istekte sessionToken + kullanıcı bilgisini alabilsin (login sonrası
-        // /[Role]/home redirect'i için role gerekli).
+        
         var meResult = await Mediator.Send(new FindMeQuery(result.Value), cancellationToken);
         return meResult.Match(
             user => Results.Ok(new LoginResponse(sessionToken, user)),
