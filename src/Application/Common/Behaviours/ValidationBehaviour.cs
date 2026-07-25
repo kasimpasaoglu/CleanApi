@@ -1,5 +1,3 @@
-using ValidationException = Application.Common.Exceptions.ValidationException;
-
 namespace Application.Common.Behaviours;
 
 public class ValidationBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>

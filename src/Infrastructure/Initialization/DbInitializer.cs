@@ -1,6 +1,3 @@
-using Infrastructure.Initialization.Admin;
-using Microsoft.AspNetCore.Builder;
-
 namespace Infrastructure.Initialization;
 
 public class DbInitializer(
@@ -28,7 +25,6 @@ public class DbInitializer(
     public async Task TrySeedAsync(string geoDataJsonPath, CancellationToken cancellationToken = default)
     {
         await new AdminSeeder(userManager, roleManager, context, logger).SeedAsync(cancellationToken);
-        
     }
 }
 
@@ -50,7 +46,7 @@ public static class DbInitializerExtensions
             var geoJsonPath = cfg.GetValue<string>("GeoSeed:JsonPath");
             if (string.IsNullOrWhiteSpace(geoJsonPath))
                 throw new InvalidOperationException("GeoSeed:JsonPath missing");
-            
+
 
             await initializer.TrySeedAsync(geoJsonPath);
         }

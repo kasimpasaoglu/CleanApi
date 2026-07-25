@@ -1,5 +1,3 @@
-using Domain.Interfaces.Repositories;
-
 namespace Infrastructure.Persistence.Repositories;
 
 public class SampleEntityRepository(AppDbContext dbContext) : EfRepository<SampleEntity, Guid>(dbContext), ISampleEntityRepository

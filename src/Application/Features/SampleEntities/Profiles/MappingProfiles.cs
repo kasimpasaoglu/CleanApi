@@ -1,7 +1,3 @@
-using Application.Features.SampleEntities.Commands.CreateSampleEntity;
-using Application.Features.SampleEntities.Queries.GetSampleEntitiesByNumber;
-
-
 namespace Application.Features.SampleEntities.Profiles;
 
 public class MappingProfiles : Profile

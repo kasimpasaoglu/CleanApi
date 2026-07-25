@@ -1,5 +1,3 @@
-using Application.Common.Interfaces;
-
 namespace Infrastructure.Persistence.Interceptors;
 
 public class AuditableEntitySaveChangesInterceptor(
@@ -19,7 +17,7 @@ public class AuditableEntitySaveChangesInterceptor(
 
         return base.SavingChangesAsync(eventData, result, cancellationToken);
     }
-    
+
     private void UpdateAuditableEntities(DbContext? context)
     {
         if (context == null) return;
@@ -30,12 +28,12 @@ public class AuditableEntitySaveChangesInterceptor(
             {
                 case EntityState.Added:
                     entry.Entity.CreatedDate = entry.Entity.CreatedDate == default ? dateTimeProvider.UtcNow : entry.Entity.CreatedDate;
-                    entry.Entity.CreatedBy ??= currentUserService.UserId ;
+                    entry.Entity.CreatedBy ??= currentUserService.UserId;
                     entry.Entity.CreatedByDepartmentId ??= currentUserService.UserDepartmentId;
                     break;
 
                 case EntityState.Modified:
-                    entry.Entity.LastModifiedDate = dateTimeProvider.UtcNow ;
+                    entry.Entity.LastModifiedDate = dateTimeProvider.UtcNow;
                     entry.Entity.LastModifiedBy = currentUserService.UserId;
                     break;
             }

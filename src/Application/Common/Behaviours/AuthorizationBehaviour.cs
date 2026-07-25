@@ -1,7 +1,3 @@
-
-
-using Application.Common.Exceptions;
-
 namespace Application.Common.Behaviours;
 
 public class AuthorizationBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : notnull
@@ -26,7 +22,7 @@ public class AuthorizationBehaviour<TRequest, TResponse> : IPipelineBehavior<TRe
             // Must be authenticated user
             if (_currentUserService.UserId == null)
             {
-                throw new BusinessException(Error.Unauthorized("User not logged in", "Kullanici girisi yapilmamis" ));
+                throw new BusinessException(Error.Unauthorized("User not logged in", "Kullanici girisi yapilmamis"));
             }
 
             // Role-based authorization
@@ -52,7 +48,7 @@ public class AuthorizationBehaviour<TRequest, TResponse> : IPipelineBehavior<TRe
                 // Must be a member of at least one role in roles
                 if (!authorized)
                 {
-                    throw new BusinessException(Error.Forbidden(ErrorCodes.Forbidden, $"{_currentUserService.FullName} kullanicisi bu sayfayi goremez" ));
+                    throw new BusinessException(Error.Forbidden(ErrorCodes.Forbidden, $"{_currentUserService.FullName} kullanicisi bu sayfayi goremez"));
                 }
             }
 
@@ -66,7 +62,7 @@ public class AuthorizationBehaviour<TRequest, TResponse> : IPipelineBehavior<TRe
 
                     if (!authorized)
                     {
-                        throw new BusinessException(Error.Forbidden(ErrorCodes.Forbidden, $"{_currentUserService.FullName} kullanicisi bu sayfayi goremez" ));
+                        throw new BusinessException(Error.Forbidden(ErrorCodes.Forbidden, $"{_currentUserService.FullName} kullanicisi bu sayfayi goremez"));
                     }
                 }
             }

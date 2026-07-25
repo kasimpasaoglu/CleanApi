@@ -1,7 +1,3 @@
-
-using Application.Common.Models;
-using Domain.Interfaces;
-
 namespace Infrastructure.Identity;
 
 public class ApplicationUser : IdentityUser
@@ -15,10 +11,9 @@ public class ApplicationUser : IdentityUser
     public DateTimeOffset? DeletedDate { get; set; }
     public string? DeletedBy { get; set; }
 
-    
-    public void InitRegistration(string firstName, string lastName, string phone,string email, Guid departmentId)
-    {
 
+    public void InitRegistration(string firstName, string lastName, string phone, string email, Guid departmentId)
+    {
         FirstName = StringHelpers.CapitalizeEachWord(firstName);
         LastName = StringHelpers.CapitalizeEachWord(lastName);
         PhoneNumber = PhoneHelpers.NormalizePhoneNumber(phone);
@@ -28,7 +23,7 @@ public class ApplicationUser : IdentityUser
         IsCompletedRegistration = false;
     }
 
- 
+
     public void SetIsCompletedRegistration()
     {
         IsCompletedRegistration = !string.IsNullOrWhiteSpace(FirstName)
@@ -42,8 +37,7 @@ public class ApplicationUser : IdentityUser
     {
         IsCompletedRegistration = false;
     }
-    
-    
+
 
     public void SoftDelete(string deletedBy, DateTimeOffset now)
     {
@@ -67,11 +61,11 @@ public class ApplicationUser : IdentityUser
 
         if (!string.IsNullOrWhiteSpace(NormalizedUserName))
             NormalizedUserName = $"{NormalizedUserName}{suffix}";
-        
+
         LockoutEnabled = true;
         LockoutEnd = DateTimeOffset.MaxValue;
     }
-    
+
     public UserDto ToUserDto(IEnumerable<string>? roles = null)
     {
         return new UserDto
@@ -91,7 +85,4 @@ public class ApplicationUser : IdentityUser
             Roles = roles?.ToList() ?? []
         };
     }
-
-
-
 }

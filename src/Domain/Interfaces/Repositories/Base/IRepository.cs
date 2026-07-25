@@ -1,5 +1,3 @@
-using System.Linq.Expressions;
-
 namespace Domain.Interfaces.Repositories.Base;
 
 public interface IRepository<T, in TId> where T : BaseEntity<TId>
@@ -24,10 +22,10 @@ public interface IRepository<T, in TId> where T : BaseEntity<TId>
     // CRUD
     Task AddAsync(T entity, CancellationToken cancellationToken = default);
     Task AddRangeAsync(IEnumerable<T> entities, CancellationToken cancellationToken = default);
-    
+
     void Update(T entity);
     void UpdateRange(IEnumerable<T> entities);
-    
+
     void Remove(T entity);
     void RemoveRange(IEnumerable<T> entities);
 

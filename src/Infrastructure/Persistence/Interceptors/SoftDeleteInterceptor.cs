@@ -1,6 +1,3 @@
-using Domain.Interfaces;
-using Infrastructure.Identity;
-
 namespace Infrastructure.Persistence.Interceptors;
 
 public class SoftDeleteInterceptor(IHttpContextAccessor httpContextAccessor) : SaveChangesInterceptor
@@ -35,13 +32,13 @@ public class SoftDeleteInterceptor(IHttpContextAccessor httpContextAccessor) : S
             entry.State = EntityState.Modified;
             var userName = httpContextAccessor.HttpContext?.User?.Identity?.Name ?? "system";
             var now = DateTimeOffset.UtcNow;
-            
+
             switch (entry.Entity)
             {
                 case ApplicationUser u:
                     u.SoftDelete(userName, now);
                     break;
-                
+
                 case BaseSoftDeletableEntity<Guid> baseSoft:
                     baseSoft.IsDeleted = true;
                     baseSoft.DeletedDate = now;

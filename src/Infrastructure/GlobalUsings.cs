@@ -33,3 +33,7 @@ global using Domain.Common.Helpers;
 global using Domain.Constants;
 global using Domain.Entities.dbo;
 global using Infrastructure.Persistence.Repositories.Base;
+global using System.Linq.Expressions;
+global using Microsoft.EntityFrameworkCore.ChangeTracking;
+global using Infrastructure.Initialization.Admin;
+global using Microsoft.AspNetCore.Builder;

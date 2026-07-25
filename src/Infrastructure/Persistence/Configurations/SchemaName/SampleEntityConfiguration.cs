@@ -1,5 +1,3 @@
-using Domain.Entities.SchemaName;
-
 namespace Infrastructure.Persistence.Configurations.SchemaName;
 
 public class SampleEntityConfiguration : IEntityTypeConfiguration<SampleEntity>

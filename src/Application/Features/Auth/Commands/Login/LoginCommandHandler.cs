@@ -1,5 +1,3 @@
-using System.Security.Claims;
-
 namespace Application.Features.Auth.Commands.Login;
 
 public sealed class LoginCommandHandler(IIdentityService identityService)

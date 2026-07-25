@@ -1,7 +1,5 @@
 #pragma warning disable CA1873
 
-using System.Text.Json;
-using System.Text.Json.Serialization;
 
 namespace Application.Common.Behaviours;
 
@@ -10,10 +8,9 @@ public class UnhandledExceptionBehaviour<TRequest, TResponse>(
     ICurrentUserService currentUser,
     IAuditLogWriter auditLogWriter,
     IRequestCancellationClassifier cancellationClassifier
-    ) : IPipelineBehavior<TRequest, TResponse>
+) : IPipelineBehavior<TRequest, TResponse>
     where TRequest : IRequest<TResponse>
 {
-
     public async Task<TResponse> Handle(
         TRequest request,
         RequestHandlerDelegate<TResponse> next,
@@ -53,7 +50,7 @@ public class UnhandledExceptionBehaviour<TRequest, TResponse>(
             throw;
         }
     }
-    
+
     private static string BuildSafeErrorPayload(TRequest request, Exception ex)
     {
         // Burada amaç: full dump değil, güvenli + kısa özet

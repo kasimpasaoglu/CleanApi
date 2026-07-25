@@ -1,7 +1,3 @@
-using Application.Common.Interfaces;
-using Domain.Entities.dbo;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
-
 namespace Infrastructure.Persistence.Interceptors;
 
 public class AuditLogInterceptor(ICurrentUserService currentUserService) : SaveChangesInterceptor
@@ -9,7 +5,6 @@ public class AuditLogInterceptor(ICurrentUserService currentUserService) : SaveC
     public override async ValueTask<InterceptionResult<int>> SavingChangesAsync(
         DbContextEventData eventData,
         InterceptionResult<int> result,
-        
         CancellationToken cancellationToken = default)
     {
         if (eventData.Context is null) return result;
@@ -25,7 +20,7 @@ public class AuditLogInterceptor(ICurrentUserService currentUserService) : SaveC
     private List<AuditLog> CreateAuditEntries(DbContext context)
     {
         var entries = context.ChangeTracker.Entries()
-            .Where(e => e.State is EntityState.Added or EntityState.Modified or EntityState.Deleted && 
+            .Where(e => e.State is EntityState.Added or EntityState.Modified or EntityState.Deleted &&
                         e.Entity is not AuditLog);
 
         var audits = new List<AuditLog>();
@@ -38,7 +33,7 @@ public class AuditLogInterceptor(ICurrentUserService currentUserService) : SaveC
                 Action = entry.State.ToString(),
                 PerformedAt = DateTimeOffset.UtcNow,
                 PerformedById = currentUserService.UserId ?? "system",
-                PerformedByName =  currentUserService.FullName ?? "system",
+                PerformedByName = currentUserService.FullName ?? "system",
                 PerformedByIp = currentUserService.IpAddress ?? "unknown",
                 KeyValues = SerializeKeys(entry),
                 OldValues = entry.State is EntityState.Modified or EntityState.Deleted

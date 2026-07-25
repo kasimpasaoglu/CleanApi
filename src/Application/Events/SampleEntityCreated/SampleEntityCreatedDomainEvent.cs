@@ -1,4 +1,4 @@
-using Application.Events.Base;
+
 
 namespace Application.Events.SampleEntityCreated;
 

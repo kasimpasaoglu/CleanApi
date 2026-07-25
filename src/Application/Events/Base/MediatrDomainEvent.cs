@@ -1,8 +1,5 @@
-
-
-
-
 namespace Application.Events.Base;
+
 /// <summary>
 /// Adapter Class
 /// </summary>
